@@ -57,7 +57,7 @@ def main():
         prices, market_caps = fetch_historical_data(coin, days=365)
         historical_data[coin] = {'prices': prices, 'market_caps': market_caps}
         time.sleep(2)  # 2-second delay
-
+ 
     save_to_cache(historical_data)
 
     # Process market cap data
