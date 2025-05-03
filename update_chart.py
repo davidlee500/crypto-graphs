@@ -122,16 +122,26 @@ def main():
         avg_total3_performance = pd.concat(total3_performances, axis=1).mean(axis=1)
 
         fig = go.Figure()
-        fig.add_trace(go.Scatter(x=avg_btc_performance.index, y=avg_btc_performance, mode='lines', name='BTC', line=dict(color='orange')))
-        fig.add_trace(go.Scatter(x=avg_eth_performance.index, y=avg_eth_performance, mode='lines', name='ETH', line=dict(color='purple')))
-        fig.add_trace(go.Scatter(x=avg_total3_performance.index, y=avg_total3_performance, mode='lines', name='TOTAL3', line=dict(color='blue')))
+        fig.add_trace(go.Scatter(x=avg_btc_performance.index, y=avg_btc_performance.round(2), mode='lines', name='BTC', line=dict(color='orange')))
+        fig.add_trace(go.Scatter(x=avg_eth_performance.index, y=avg_eth_performance.round(2), mode='lines', name='ETH', line=dict(color='purple')))
+        fig.add_trace(go.Scatter(x=avg_total3_performance.index, y=avg_total3_performance.round(2), mode='lines', name='TOTAL3', line=dict(color='blue')))
         fig.update_layout(
-            title="Average Performance After >10% Market Cap Drop (8 Years)",
+            title="Average Performance After >10% Market Cap Drop (1 Year)",
             xaxis_title="Days After Drop",
             yaxis_title="Percentage Change (%)",
-            legend_title="Assets"
+            legend_title="Assets",
+            template="simple_white",
+            showlegend=True,
+            hovermode='x unified'
         )
-        fig.write_html(HTML_FILE)
+        fig.write_html(
+            HTML_FILE,
+            include_plotlyjs='cdn',  # Use CDN version of plotly.js
+            full_html=True,
+            include_mathjax=False,
+            validate=False,
+            config={'displayModeBar': False}  # Hide the mode bar
+        )
         print(f"Chart saved to {HTML_FILE}")
     else:
         print("No drop events found with sufficient data.")
