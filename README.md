@@ -16,6 +16,29 @@ Crypto Graphs is a free, automated website that hosts multiple crypto market cha
 
 ---
 
+## Project Structure
+
+```
+crypto-graphs/
+├── src/
+│   ├── charts/          # Chart generation scripts
+│   ├── utils/           # Utility modules
+│   └── config.py        # Configuration settings
+├── data/
+│   ├── raw/            # Raw data storage
+│   └── processed/      # Processed data storage
+├── public/
+│   ├── charts/         # Generated chart files
+│   ├── css/           # Stylesheets
+│   └── index.html     # Main webpage
+├── logs/              # Log files
+├── tests/            # Test files
+├── requirements.txt  # Python dependencies
+└── README.md        # This file
+```
+
+---
+
 ## Chart Summaries
 
 ### Chart 1: Average Performance After >10% Market Cap Drop
@@ -33,17 +56,24 @@ Crypto Graphs is a free, automated website that hosts multiple crypto market cha
   - **Update Frequency:** Daily (automated).
   - **Hosting:** [crypto_performance.html](https://davidlee500.github.io/crypto-graphs/crypto_performance.html)
 
----
+### Chart 2: Top 200 Coins Performance Since Trump Election
 
-<!-- Template for future charts: Copy and fill in for each new chart -->
-### Chart 2: [Chart Title Here]
-
-- **Filename:** `[your_chart_file.html]`
+- **Filename:** `trump_election_performance.html`
 - **Description:**  
-  [Brief description of what this chart shows.]
+  Interactive scatter plot showing price performance of top 200 cryptocurrencies since November 4, 2024, excluding stablecoins and wrapped tokens. Visualizes the relationship between market cap and price change, with color-coding for positive (blue) and negative (red) performance.
 - **Requirements:**  
-  - [List requirements for this chart, e.g., data sources, event definitions, axes, update frequency, etc.]
-  - **Hosting:** [link to chart file]
+  - **Data Source:** CoinGecko API (historical and current prices).
+  - **Timeframe:** November 4, 2024 to current date.
+  - **Coins:** Top 200 by market cap (excluding stablecoins and wrapped tokens).
+  - **X-axis:** Market cap (USD, log scale, Nov 4, 2024).
+  - **Y-axis:** Percentage price change from Nov 4, 2024.
+  - **Visualization:** 
+    - Scatter plot with fixed-size markers (size 12, opacity 0.8).
+    - Color-coded: blue (≥0%), red (<0%).
+    - Interactive hover details (name, market cap, prices, % change).
+    - Reference line at y=0.
+  - **Update Frequency:** Daily (automated).
+  - **Hosting:** [trump_election_performance.html](https://davidlee500.github.io/crypto-graphs/trump_election_performance.html)
 
 ---
 
@@ -62,62 +92,33 @@ Crypto Graphs is a free, automated website that hosts multiple crypto market cha
 - **Plotly** (for interactive charts, using CDN to minimize HTML size).
 - **CoinGecko API** (API key via environment variable or GitHub secret).
 - **GitHub Actions** (for daily automation, using a Personal Access Token for push).
-- **GitHub Pages** (serves HTML files from the root directory or a `charts/` directory).
-
----
-
-## Current State
-
-- **Codebase:**  
-  - `update_chart.py`: Fetches top 200 coins, processes 1 year of data, generates `crypto_performance.html`.
-  - `historical_data.json`: Cached raw data for reproducibility and debugging.
-  - `.github/workflows/update_chart.yml`: GitHub Actions workflow for daily automation.
-  - `requirements.txt`: Python dependencies.
-- **Charts:**  
-  - [crypto_performance.html](https://davidlee500.github.io/crypto-graphs/crypto_performance.html) (auto-updated daily)
-- **Automation:**  
-  - Workflow runs daily at midnight UTC, commits new chart/data if changed.
-  - Uses repository secret `GH_TOKEN` for push authentication.
-  - CoinGecko API key is set as `COINGECKO_API_KEY` secret.
-- **Hosting:**  
-  - GitHub Pages serves HTML files from the root directory.
-  - Main chart is accessible at `/crypto_performance.html`.
-- **Scalability:**  
-  - Site structure supports adding more charts (e.g., place new charts in a `charts/` directory and link from a main `index.html` dashboard).
-
----
-
-## How to Continue or Expand
-
-1. **Add New Charts:**  
-   - Create new Python scripts to generate additional HTML charts.
-   - Place new charts in a `charts/` directory.
-   - Update or create `index.html` to link to all available charts.
-
-2. **Improve Data Processing:**  
-   - Optimize data fetching (e.g., reduce API calls, handle rate limits).
-   - Add error handling and logging for robustness.
-
-3. **Enhance Visualization:**  
-   - Add tooltips, annotations, or additional metrics as needed.
-   - Consider user feedback for new features.
-
-4. **Maintain Automation:**  
-   - Ensure GitHub Actions workflow remains functional (update secrets if needed).
-   - Monitor for API changes or quota issues.
+- **GitHub Pages** (serves HTML files from the `public/charts/` directory).
 
 ---
 
 ## Setup & Development
 
-- **Clone the repo:**  
-  `git clone https://github.com/davidlee500/crypto-graphs.git`
-- **Install dependencies:**  
-  `python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt`
-- **Run locally:**  
-  `python update_chart.py` (requires `COINGECKO_API_KEY` in environment)
-- **Manual workflow run:**  
-  Trigger via GitHub Actions tab if needed.
+1. Create a virtual environment:
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+3. Run the charts:
+```bash
+./run_charts.py
+```
+
+Or run individual charts:
+```bash
+python src/charts/crypto_performance.py
+python src/charts/trump_election.py
+```
 
 ---
 
@@ -127,6 +128,16 @@ Crypto Graphs is a free, automated website that hosts multiple crypto market cha
   - Set as `COINGECKO_API_KEY` in GitHub repository secrets for automation.
 - **GitHub PAT:**  
   - Set as `GH_TOKEN` in repository secrets for workflow push access.
+
+---
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
 
 ---
 

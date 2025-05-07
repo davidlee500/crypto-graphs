@@ -1,4 +1,4 @@
-name: Update Crypto Chart
+name: Update Crypto Charts
 
 on:
   schedule:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:  # Allows manual runs
 
 jobs:
-  update-chart:
+  update-charts:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -23,15 +23,17 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run chart update script
+      - name: Run chart update scripts
         env:
           COINGECKO_API_KEY: ${{ secrets.COINGECKO_API_KEY }}
-        run: python update_chart.py
+        run: |
+          python src/charts/crypto_performance.py
+          python src/charts/trump_election.py
 
-      - name: Commit and push updated chart
+      - name: Commit and push updated charts
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add crypto_performance.html historical_data.json
-          git commit -m "Daily chart update: $(date)" || echo "No changes to commit"
+          git add trump_election_performance.html crypto_performance.html historical_data.json index.html
+          git commit -m "Daily chart updates: $(date)" || echo "No changes to commit"
           git push
