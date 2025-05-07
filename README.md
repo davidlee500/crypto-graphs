@@ -1,7 +1,7 @@
 # Crypto Graphs
 
 **Project Owner:** David Lee (davidlee500@gmail.com)  
-**Live Site:** [crypto-graphs on GitHub Pages](https://davidlee500.github.io/crypto-graphs/crypto_performance.html)  
+**Live Site:** [crypto-graphs on GitHub Pages](https://davidlee500.github.io/crypto-graphs/)  
 **Repository:** [davidlee500/crypto-graphs](https://github.com/davidlee500/crypto-graphs)
 
 ---
@@ -56,15 +56,15 @@ crypto-graphs/
   - **Update Frequency:** Daily (automated).
   - **Hosting:** [crypto_performance.html](https://davidlee500.github.io/crypto-graphs/crypto_performance.html)
 
-### Chart 2: Top 200 Coins Performance Since Trump Election
+### Chart 2: Top 50 Coins Performance Since Trump Election
 
 - **Filename:** `trump_election_performance.html`
 - **Description:**  
-  Interactive scatter plot showing price performance of top 200 cryptocurrencies since November 4, 2024, excluding stablecoins and wrapped tokens. Visualizes the relationship between market cap and price change, with color-coding for positive (blue) and negative (red) performance.
+  Interactive scatter plot showing price performance of top 50 cryptocurrencies since November 4, 2024, excluding stablecoins and wrapped tokens. Visualizes the relationship between market cap and price change, with color-coding for positive (blue) and negative (red) performance.
 - **Requirements:**  
   - **Data Source:** CoinGecko API (historical and current prices).
   - **Timeframe:** November 4, 2024 to current date.
-  - **Coins:** Top 200 by market cap (excluding stablecoins and wrapped tokens).
+  - **Coins:** Top 50 by market cap (excluding stablecoins and wrapped tokens).
   - **X-axis:** Market cap (USD, log scale, Nov 4, 2024).
   - **Y-axis:** Percentage price change from Nov 4, 2024.
   - **Visualization:** 
