@@ -29,11 +29,11 @@ crypto-graphs/
 │   └── processed/      # Processed data storage
 ├── public/
 │   ├── charts/         # Generated chart files
-│   ├── css/           # Stylesheets
-│   └── index.html     # Main webpage
+│   └── css/           # Stylesheets
 ├── logs/              # Log files
 ├── tests/            # Test files
 ├── requirements.txt  # Python dependencies
+├── index.html        # Main webpage (links to charts)
 └── README.md        # This file
 ```
 
@@ -54,7 +54,7 @@ crypto-graphs/
   - **Y-axis:** % change from Day 0.
   - **Legend:** BTC, ETH, TOTAL3.
   - **Update Frequency:** Daily (automated).
-  - **Hosting:** [crypto_performance.html](https://davidlee500.github.io/crypto-graphs/crypto_performance.html)
+  - **Hosting:** [crypto_performance.html](https://davidlee500.github.io/crypto-graphs/public/charts/crypto_performance.html)
 
 ### Chart 2: Top 50 Coins Performance Since Trump Election
 
@@ -73,8 +73,32 @@ crypto-graphs/
     - Interactive hover details (name, market cap, prices, % change).
     - Reference line at y=0.
   - **Update Frequency:** Daily (automated).
-  - **Hosting:** [trump_election_performance.html](https://davidlee500.github.io/crypto-graphs/trump_election_performance.html)
+  - **Hosting:** [trump_election_performance.html](https://davidlee500.github.io/crypto-graphs/public/charts/trump_election_performance.html)
 
+### Chart 3: Top 10 Cryptocurrencies and Traditional Assets Performance Since Liberation Day
+
+- **Filename:** `liberation_day_performance.html`
+- **Description:**  
+  Interactive line chart tracking the percentage price changes of the top 10 cryptocurrencies (by market cap) alongside traditional assets (Gold, S&P 500, and Nasdaq 100) since Liberation Day (April 2nd, 2025). Each asset is represented by a distinctly colored line showing its performance over time.
+- **Requirements:**  
+  - **Data Sources:** 
+    - CoinGecko API (for cryptocurrency historical and current prices)
+    - Financial APIs (for Gold, S&P 500, and Nasdaq 100 data)
+  - **Timeframe:** April 2, 2025 (Liberation Day) to current date.
+  - **Assets:** 
+    - Top 10 cryptocurrencies by market cap as of Liberation Day (excluding stablecoins and wrapped tokens)
+    - Gold price
+    - S&P 500 index
+    - Nasdaq 100 index
+  - **X-axis:** Days since Liberation Day.
+  - **Y-axis:** Percentage price change from Liberation Day.
+  - **Visualization:** 
+    - Line chart with each asset having its own distinct color.
+    - Interactive hover details showing date, asset name, and percentage change.
+    - Complete legend identifying each cryptocurrency and traditional asset.
+    - Option to toggle visibility of individual assets.
+  - **Update Frequency:** Daily (automated).
+  - **Hosting:** [liberation_day_performance.html](https://davidlee500.github.io/crypto-graphs/public/charts/liberation_day_performance.html)
 ---
 
 ## Goals & Requirements
@@ -92,7 +116,7 @@ crypto-graphs/
 - **Plotly** (for interactive charts, using CDN to minimize HTML size).
 - **CoinGecko API** (API key via environment variable or GitHub secret).
 - **GitHub Actions** (for daily automation, using a Personal Access Token for push).
-- **GitHub Pages** (serves HTML files from the `public/charts/` directory).
+- **GitHub Pages** (serves the site from the repository root; main page is `index.html`, which links to charts in `public/charts/`).
 
 ---
 
