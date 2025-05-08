@@ -25,7 +25,7 @@ logging.basicConfig(
 BASE_URL = "https://api.coingecko.com/api/v3"
 API_KEY = os.getenv("COINGECKO_API_KEY", "CG-1KR3Wbo6yQfvUD9EHQoeECet")
 START_DATE = "04-11-2024"  # November 4, 2024 (Trump Election)
-HTML_FILE = "trump_election_performance.html"
+HTML_FILE = "public/charts/trump_election_performance.html"
 REQUEST_DELAY = 5  # Fixed 5 second delay between requests
 
 # List of coins to exclude (stablecoins and wrapped tokens)

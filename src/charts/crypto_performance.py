@@ -8,7 +8,7 @@ import os
 
 BASE_URL = "https://api.coingecko.com/api/v3"
 CACHE_FILE = "historical_data.json"
-HTML_FILE = "crypto_performance.html"
+HTML_FILE = "public/charts/crypto_performance.html"
 API_KEY = os.getenv("COINGECKO_API_KEY", "CG-1KR3Wbo6yQfvUD9EHQoeECet")  # Fallback for local runs
 
 def fetch_top_coins(limit=200):
