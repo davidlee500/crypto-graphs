@@ -27,13 +27,12 @@ jobs:
         env:
           COINGECKO_API_KEY: ${{ secrets.COINGECKO_API_KEY }}
         run: |
-          python src/charts/crypto_performance.py
-          python src/charts/trump_election.py
+          python run_charts.py
 
       - name: Commit and push updated charts
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add trump_election_performance.html crypto_performance.html historical_data.json index.html
+          git add public/charts/*.html
           git commit -m "Daily chart updates: $(date)" || echo "No changes to commit"
           git push

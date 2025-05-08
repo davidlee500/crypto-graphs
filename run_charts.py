@@ -10,7 +10,7 @@ from pathlib import Path
 src_dir = Path(__file__).parent / "src"
 sys.path.append(str(src_dir))
 
-from charts import crypto_performance, trump_election
+from charts import crypto_performance, trump_election, liberation_day_performance
 
 def main():
     try:
@@ -21,6 +21,10 @@ def main():
         # Run Trump election chart
         print("Generating Trump election chart...")
         trump_election.main()
+        
+        # Run Liberation Day performance chart
+        print("Generating Liberation Day performance chart...")
+        liberation_day_performance.generate_liberation_day_chart()
         
         print("All charts generated successfully!")
         
