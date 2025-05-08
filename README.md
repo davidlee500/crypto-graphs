@@ -8,11 +8,11 @@
 
 ## Project Overview
 
-Crypto Graphs is a free, automated website that hosts multiple crypto market charts, starting with a chart that visualizes the average performance of major cryptocurrencies (BTC, ETH, and TOTAL3) following significant market cap drops. The site is designed for easy expansion to additional charts and is updated daily using GitHub Actions.
+Crypto Graphs is a free, automated website that hosts multiple crypto market charts. The site features a modern, single-page interface with sidebar navigation, allowing users to dynamically load and view charts without page reloads. It began with a chart visualizing the average performance of major cryptocurrencies (BTC, ETH, and TOTAL3) following significant market cap drops and is designed for easy expansion. The site is updated daily using GitHub Actions.
 
 - **Data Source:** CoinGecko API (free tier, API key required).
 - **Automation:** Daily updates via GitHub Actions workflow.
-- **Hosting:** GitHub Pages (serves generated HTML charts).
+- **Hosting:** GitHub Pages (serves the main `index.html` single-page application which dynamically loads generated HTML charts).
 
 ---
 
@@ -33,7 +33,7 @@ crypto-graphs/
 ├── logs/              # Log files
 ├── tests/            # Test files
 ├── requirements.txt  # Python dependencies
-├── index.html        # Main webpage (links to charts)
+├── index.html        # Main single-page application interface (loads charts dynamically)
 └── README.md        # This file
 ```
 
@@ -54,7 +54,7 @@ crypto-graphs/
   - **Y-axis:** % change from Day 0.
   - **Legend:** BTC, ETH, TOTAL3.
   - **Update Frequency:** Daily (automated).
-  - **Hosting:** [crypto_performance.html](https://davidlee500.github.io/crypto-graphs/public/charts/crypto_performance.html)
+  - **Hosting:** [crypto_performance.html](https://davidlee500.github.io/crypto-graphs/public/charts/crypto_performance.html) (Viewed within the main site interface)
 
 ### Chart 2: Top 50 Coins Performance Since Trump Election
 
@@ -73,7 +73,7 @@ crypto-graphs/
     - Interactive hover details (name, market cap, prices, % change).
     - Reference line at y=0.
   - **Update Frequency:** Daily (automated).
-  - **Hosting:** [trump_election_performance.html](https://davidlee500.github.io/crypto-graphs/public/charts/trump_election_performance.html)
+  - **Hosting:** [trump_election_performance.html](https://davidlee500.github.io/crypto-graphs/public/charts/trump_election_performance.html) (Viewed within the main site interface)
 
 ### Chart 3: Top 10 Cryptocurrencies and Traditional Assets Performance Since Liberation Day
 
@@ -98,7 +98,7 @@ crypto-graphs/
     - Complete legend identifying each cryptocurrency and traditional asset.
     - Option to toggle visibility of individual assets.
   - **Update Frequency:** Daily (automated).
-  - **Hosting:** [liberation_day_performance.html](https://davidlee500.github.io/crypto-graphs/public/charts/liberation_day_performance.html)
+  - **Hosting:** [liberation_day_performance.html](https://davidlee500.github.io/crypto-graphs/public/charts/liberation_day_performance.html) (Viewed within the main site interface)
 ---
 
 ## Goals & Requirements
@@ -116,7 +116,7 @@ crypto-graphs/
 - **Plotly** (for interactive charts, using CDN to minimize HTML size).
 - **CoinGecko API** (API key via environment variable or GitHub secret).
 - **GitHub Actions** (for daily automation, using a Personal Access Token for push).
-- **GitHub Pages** (serves the site from the repository root; main page is `index.html`, which links to charts in `public/charts/`).
+- **GitHub Pages** (serves the site from the repository root; the main page is `index.html`, a single-page application that dynamically loads individual chart HTML files from `public/charts/` into an iframe).
 
 ---
 

@@ -7,70 +7,162 @@
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #f8f9fa; /* Lighter overall background */
         }
-        h1 {
-            color: #333;
-            text-align: center;
-            margin-bottom: 40px;
+        header {
+            background-color: #ffffff; /* White header */
+            color: #333; /* Darker text for contrast */
+            padding: 18px 25px;
+            text-align: left; /* Align title to the left */
+            border-bottom: 1px solid #e0e0e0; /* Subtle border */
+            box-shadow: none; /* Remove shadow */
         }
-        .chart-container {
-            margin-bottom: 40px;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #f9f9f9;
+        header h1 {
+            margin: 0;
+            font-size: 1.6em; /* Slightly smaller title */
+            font-weight: 600;
         }
-        .chart-title {
-            color: #444;
-            margin-bottom: 10px;
+        .main-container {
+            display: flex;
+            flex-grow: 1;
+            overflow: hidden;
         }
-        .chart-description {
-            color: #666;
-            margin-bottom: 15px;
+        #nav-panel {
+            width: 260px; /* Slightly narrower nav panel */
+            background-color: #ffffff; /* White nav panel */
+            padding: 25px;
+            border-right: 1px solid #e0e0e0; /* Subtle border */
+            overflow-y: auto;
+            box-shadow: none; /* Remove shadow */
         }
-        .chart-link {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
+        #nav-panel h2 {
+            color: #212529; /* Darker heading */
+            font-size: 1.2em; /* Adjusted size */
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 25px;
+            border-bottom: none; /* Remove border */
+            padding-bottom: 0;
+        }
+        #nav-panel ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        #nav-panel li a {
+            display: block;
+            padding: 10px 15px; /* Adjusted padding */
             text-decoration: none;
-            border-radius: 4px;
-            transition: background-color 0.2s;
+            color: #495057; /* Subdued link color */
+            border-radius: 4px; /* Softer radius */
+            margin-bottom: 6px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            font-weight: 500;
+            border-left: 3px solid transparent; /* For active state indicator */
         }
-        .chart-link:hover {
-            background-color: #0056b3;
+        #nav-panel li a:hover {
+            background-color: #e9ecef; /* Light hover */
+            color: #007bff; /* Accent color on hover */
+            border-left: 3px solid #e9ecef;
+        }
+        #nav-panel li a.active {
+            background-color: #e9ecef; /* Light active background */
+            color: #0056b3; /* Stronger accent for active */
+            font-weight: 600;
+            border-left: 3px solid #007bff; /* Accent border for active */
+        }
+        #chart-display-area {
+            flex-grow: 1;
+            padding: 25px;
+            background-color: #f8f9fa; /* Match body background */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        #chart-iframe {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #dee2e6; /* Lighter border */
+            border-radius: 6px; /* Softer radius */
+            box-shadow: none; /* Remove shadow */
+        }
+        .chart-placeholder {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            color: #6c757d; /* Subdued placeholder text */
+            font-size: 1.1em;
         }
     </style>
 </head>
 <body>
-    <h1>Crypto Market Analysis Charts</h1>
+    <header>
+        <h1>Crypto Market Analysis</h1>
+    </header>
     
-    <div class="chart-container">
-        <h2 class="chart-title">Chart 1: Performance After Market Cap Drops</h2>
-        <p class="chart-description">
-            Visualizes the average performance of BTC, ETH, and TOTAL3 over 90 days following >10% drops in total crypto market cap.
-        </p>
-        <a href="public/charts/crypto_performance.html" class="chart-link">View Chart</a>
+    <div class="main-container">
+        <nav id="nav-panel">
+            <h2>Charts</h2>
+            <ul>
+                <li><a href="#" data-chart-url="public/charts/crypto_performance.html" class="chart-link">Market Cap Drop Performance</a></li>
+                <li><a href="#" data-chart-url="public/charts/trump_election_performance.html" class="chart-link">Post-Election Performance</a></li>
+                <li><a href="#" data-chart-url="public/charts/liberation_day_performance.html" class="chart-link">Liberation Day Performance</a></li>
+            </ul>
+        </nav>
+        <main id="chart-display-area">
+            <iframe id="chart-iframe" src="about:blank" title="Chart Display">
+                <p class="chart-placeholder">Select a chart from the left panel to view it here.</p>
+            </iframe>
+        </main>
     </div>
 
-    <div class="chart-container">
-        <h2 class="chart-title">Chart 2: Performance Since Trump Election</h2>
-        <p class="chart-description">
-            Interactive scatter plot showing price performance of top 50 cryptocurrencies since November 4, 2024, excluding stablecoins and wrapped tokens.
-        </p>
-        <a href="public/charts/trump_election_performance.html" class="chart-link">View Chart</a>
-    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('#nav-panel .chart-link');
+            const iframe = document.getElementById('chart-iframe');
+            const placeholderText = "Select a chart from the navigation to view it here."; // Updated placeholder text
 
-    <div class="chart-container">
-        <h2 class="chart-title">Chart 3: Performance Since Liberation Day</h2>
-        <p class="chart-description">
-            Interactive line chart tracking the percentage price changes of the top 10 cryptocurrencies (by market cap) alongside traditional assets (Gold, S&P 500, and Nasdaq 100) since Liberation Day (April 2nd, 2025).
-        </p>
-        <a href="public/charts/liberation_day_performance.html" class="chart-link">View Chart</a>
-    </div>
+            function showPlaceholder() {
+                const doc = iframe.contentWindow.document;
+                doc.open();
+                doc.write(
+                    '<html lang="en">' +
+                    '<head><title>Chart Display</title><style>' +
+                    'body { display: flex; justify-content: center; align-items: center; height: 100%; margin: 0; font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, Oxygen, Ubuntu, Cantarell, \'Open Sans\', \'Helvetica Neue\', sans-serif; color: #6c757d; font-size: 1.1em; text-align: center; padding: 20px; }' +
+                    '</style></head>' +
+                    '<body><div>' + placeholderText + '</div></body>' +
+                    '</html>'
+                );
+                doc.close();
+            }
+
+            if (links.length > 0) {
+                iframe.src = links[0].getAttribute('data-chart-url');
+                links[0].classList.add('active');
+            } else {
+                showPlaceholder(); // Show placeholder if no links, or if first link is bad (though current logic loads it)
+            }
+
+            links.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    links.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    const chartUrl = this.getAttribute('data-chart-url');
+                    if (chartUrl) {
+                        iframe.src = chartUrl;
+                    } else {
+                        showPlaceholder();
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html> 
